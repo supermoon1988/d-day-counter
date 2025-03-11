@@ -21,7 +21,7 @@
         <!-- 📌 콘텐츠 영역 -->
         <main class="content">
             <!-- D-day 계산 -->
-            <div id="dday" class="page">
+            <div id="dday" class="page active">
                 <h1>D-day 계산기</h1>
                 <label for="dateInput">D-day 날짜 선택:</label>
                 <input type="date" id="dateInput">
@@ -30,7 +30,7 @@
             </div>
 
             <!-- 계산기 -->
-            <div id="calculator" class="page" style="display: none;">
+            <div id="calculator" class="page">
                 <h1>간단한 계산기</h1>
                 <div class="calc-container">
                     <input type="text" id="calcInput" placeholder="계산식 입력 (예: 2+2)" onkeypress="handleEnter(event)">
@@ -58,7 +58,7 @@
             </div>
 
             <!-- 타이머 -->
-            <div id="timer" class="page" style="display: none;">
+            <div id="timer" class="page">
                 <h1>타이머</h1>
                 <input type="number" id="timerInput" placeholder="초 입력">
                 <button onclick="startTimer()">시작</button>
