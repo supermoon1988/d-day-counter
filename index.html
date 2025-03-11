@@ -3,18 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D-day Countdown</title>
+    <title>유틸리티 툴</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>D-day 카운트다운</h1>
-        <label for="dateInput">D-day 날짜 선택:</label>
-        <input type="date" id="dateInput">
-        <button onclick="calculateDday()">계산하기</button>
-        <p id="result"></p>
-        <button onclick="shareDday()">📤 공유하기</button>
+        <!-- 📌 사이드바 -->
+        <nav class="sidebar">
+            <h2>메뉴</h2>
+            <ul>
+                <li><a href="#" onclick="showPage('dday')">📅 D-day 계산</a></li>
+                <li><a href="#" onclick="showPage('calculator')">🧮 간단한 계산기</a></li>
+                <li><a href="#" onclick="showPage('timer')">⏳ 타이머</a></li>
+            </ul>
+        </nav>
+
+        <!-- 📌 콘텐츠 영역 -->
+        <main class="content">
+            <!-- D-day 계산 -->
+            <div id="dday" class="page">
+                <h1>D-day 계산기</h1>
+                <label for="dateInput">D-day 날짜 선택:</label>
+                <input type="date" id="dateInput">
+                <button onclick="calculateDday()">계산하기</button>
+                <p id="result"></p>
+            </div>
+
+            <!-- 계산기 -->
+            <div id="calculator" class="page" style="display: none;">
+                <h1>간단한 계산기</h1>
+                <input type="text" id="calcInput" placeholder="계산식 입력 (예: 2+2)">
+                <button onclick="calculate()">=</button>
+                <p id="calcResult"></p>
+            </div>
+
+            <!-- 타이머 -->
+            <div id="timer" class="page" style="display: none;">
+                <h1>타이머</h1>
+                <input type="number" id="timerInput" placeholder="초 입력">
+                <button onclick="startTimer()">시작</button>
+                <p id="timerDisplay"></p>
+            </div>
+        </main>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,94 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+/* 📌 컨테이너 레이아웃 */
+.container {
+    display: flex;
+    width: 100%;
+}
+
+/* 📌 사이드바 스타일 */
+.sidebar {
+    width: 200px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px;
+    background-color: #444;
+    border-radius: 5px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #555;
+}
+
+/* 📌 콘텐츠 영역 스타일 */
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+/* 📌 숨겨진 페이지 */
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* 📌 버튼 스타일 */
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input {
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

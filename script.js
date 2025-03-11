@@ -1,40 +1,58 @@
-// D-day 계산 함수
+// 📌 D-day 계산 기능
 function calculateDday() {
     let inputDate = document.getElementById("dateInput").value;
     if (!inputDate) {
         alert("날짜를 선택해주세요!");
         return;
     }
-    
+
     let today = new Date();
     let targetDate = new Date(inputDate);
     let diff = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
 
     document.getElementById("result").innerText = `D-day: ${diff}일 남았습니다!`;
-    
-    // 날짜 저장 (LocalStorage 사용)
-    localStorage.setItem("savedDate", inputDate);
 }
 
-// 페이지 로드 시 저장된 날짜 불러오기
-window.onload = function() {
-    let savedDate = localStorage.getItem("savedDate");
-    if (savedDate) {
-        document.getElementById("dateInput").value = savedDate;
-        calculateDday();
+// 📌 계산기 기능
+function calculate() {
+    let input = document.getElementById("calcInput").value;
+    try {
+        let result = eval(input);
+        document.getElementById("calcResult").innerText = `결과: ${result}`;
+    } catch (error) {
+        alert("올바른 계산식을 입력하세요.");
     }
-};
+}
 
-// 공유 기능
-function shareDday() {
-    let inputDate = document.getElementById("dateInput").value;
-    if (!inputDate) {
-        alert("날짜를 선택해주세요!");
+// 📌 타이머 기능
+let timerInterval;
+function startTimer() {
+    let seconds = parseInt(document.getElementById("timerInput").value);
+    if (isNaN(seconds) || seconds <= 0) {
+        alert("올바른 시간을 입력하세요.");
         return;
     }
-    
-    let url = `${window.location.origin}${window.location.pathname}?date=${inputDate}`;
-    navigator.clipboard.writeText(url).then(() => {
-        alert("링크가 클립보드에 복사되었습니다!\n" + url);
-    });
+
+    clearInterval(timerInterval);
+    document.getElementById("timerDisplay").innerText = `${seconds}초 남았습니다.`;
+
+    timerInterval = setInterval(() => {
+        seconds--;
+        document.getElementById("timerDisplay").innerText = `${seconds}초 남았습니다.`;
+        if (seconds <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById("timerDisplay").innerText = "⏳ 타이머 종료!";
+        }
+    }, 1000);
 }
+
+// 📌 메뉴 클릭 시 페이지 전환
+function showPage(pageId) {
+    let pages = document.querySelectorAll(".page");
+    pages.forEach(page => page.style.display = "none");
+
+    document.getElementById(pageId).style.display = "block";
+}
+
+// 초기 페이지 설정 (D-day 계산기)
+showPage("dday");
