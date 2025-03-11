@@ -13,6 +13,14 @@ function calculateDday() {
     document.getElementById("result").innerText = `D-day: ${diff}일 남았습니다!`;
 }
 
+// 📌 페이지 전환 기능
+function showPage(pageId) {
+    let pages = document.querySelectorAll(".page");
+    pages.forEach(page => page.style.display = "none");
+
+    document.getElementById(pageId).style.display = "block";
+}
+
 // 📌 계산기 기능
 let calcHistory = [];
 function appendCalc(value) {
@@ -24,16 +32,24 @@ function clearCalc() {
 }
 
 function calculate() {
-    let input = document.getElementById("calcInput").value;
+    let input = document.getElementById("calcInput").value.trim();
+    if (!input) return;
+
     try {
         let result = eval(input);
         document.getElementById("calcInput").value = result;
+
         if (calcHistory.length >= 10) calcHistory.shift();
         calcHistory.push(`${input} = ${result}`);
         updateCalcHistory();
     } catch {
         alert("올바른 계산식을 입력하세요.");
     }
+}
+
+// 📌 엔터 키 입력 지원
+function handleEnter(event) {
+    if (event.key === "Enter") calculate();
 }
 
 function updateCalcHistory() {
@@ -46,7 +62,32 @@ function updateCalcHistory() {
     });
 }
 
-// 📌 엔터 키 입력 지원
-document.getElementById("calcInput").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") calculate();
-});
+// 📌 타이머 기능
+let timerInterval;
+function startTimer() {
+    let seconds = parseFloat(document.getElementById("timerInput").value);
+    if (isNaN(seconds) || seconds <= 0) {
+        alert("올바른 시간을 입력하세요.");
+        return;
+    }
+
+    let totalTime = seconds;
+    clearInterval(timerInterval);
+
+    function updateTimer() {
+        let progress = (seconds / totalTime) * 100;
+        document.getElementById("progressBar").style.width = progress + "%";
+        document.getElementById("timerDisplay").innerText = `${seconds.toFixed(2)}초 남았습니다.`;
+
+        if (seconds <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById("timerDisplay").innerText = "⏳ 타이머 종료!";
+            document.getElementById("progressBar").style.width = "0%";
+        } else {
+            seconds -= 0.01;
+        }
+    }
+
+    timerInterval = setInterval(updateTimer, 10);
+    updateTimer();
+}

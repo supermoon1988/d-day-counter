@@ -33,9 +33,7 @@
             <div id="calculator" class="page" style="display: none;">
                 <h1>간단한 계산기</h1>
                 <div class="calc-container">
-                    <div class="calc-display">
-                        <input type="text" id="calcInput" placeholder="계산식 입력 (예: 2+2)">
-                    </div>
+                    <input type="text" id="calcInput" placeholder="계산식 입력 (예: 2+2)" onkeypress="handleEnter(event)">
                     <div class="calc-buttons">
                         <button onclick="appendCalc('7')">7</button>
                         <button onclick="appendCalc('8')">8</button>
@@ -63,4 +61,15 @@
             <div id="timer" class="page" style="display: none;">
                 <h1>타이머</h1>
                 <input type="number" id="timerInput" placeholder="초 입력">
-                <button onclick="startTimer()
+                <button onclick="startTimer()">시작</button>
+                <p id="timerDisplay"></p>
+                <div class="progress-container">
+                    <div id="progressBar"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
