@@ -32,21 +32,35 @@
             <!-- 계산기 -->
             <div id="calculator" class="page" style="display: none;">
                 <h1>간단한 계산기</h1>
-                <input type="text" id="calcInput" placeholder="계산식 입력 (예: 2+2)">
-                <button onclick="calculate()">=</button>
-                <p id="calcResult"></p>
+                <div class="calc-container">
+                    <div class="calc-display">
+                        <input type="text" id="calcInput" placeholder="계산식 입력 (예: 2+2)">
+                    </div>
+                    <div class="calc-buttons">
+                        <button onclick="appendCalc('7')">7</button>
+                        <button onclick="appendCalc('8')">8</button>
+                        <button onclick="appendCalc('9')">9</button>
+                        <button onclick="appendCalc('+')">+</button>
+                        <button onclick="appendCalc('4')">4</button>
+                        <button onclick="appendCalc('5')">5</button>
+                        <button onclick="appendCalc('6')">6</button>
+                        <button onclick="appendCalc('-')">-</button>
+                        <button onclick="appendCalc('1')">1</button>
+                        <button onclick="appendCalc('2')">2</button>
+                        <button onclick="appendCalc('3')">3</button>
+                        <button onclick="appendCalc('*')">×</button>
+                        <button onclick="appendCalc('0')">0</button>
+                        <button onclick="clearCalc()">C</button>
+                        <button onclick="calculate()">=</button>
+                        <button onclick="appendCalc('/')">÷</button>
+                    </div>
+                </div>
+                <h3>최근 결과</h3>
+                <ul id="calcHistory"></ul>
             </div>
 
             <!-- 타이머 -->
             <div id="timer" class="page" style="display: none;">
                 <h1>타이머</h1>
                 <input type="number" id="timerInput" placeholder="초 입력">
-                <button onclick="startTimer()">시작</button>
-                <p id="timerDisplay"></p>
-            </div>
-        </main>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+                <button onclick="startTimer()
