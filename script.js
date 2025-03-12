@@ -56,3 +56,21 @@ function updateCalcHistory() {
         historyElement.appendChild(li);
     });
 }
+
+// 📌 원형 타이머 기능
+let timerInterval;
+function startTimer() {
+    let seconds = parseFloat(document.getElementById("timerInput").value);
+    let totalTime = seconds;
+    if (isNaN(seconds) || seconds <= 0) return;
+
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        let progress = (seconds / totalTime) * 314;
+        document.getElementById("progressCircle").style.strokeDashoffset = progress;
+        document.getElementById("timerDisplay").innerText = `${seconds.toFixed(2)}초 남았습니다.`;
+
+        if (seconds <= 0) clearInterval(timerInterval);
+        else seconds -= 0.01;
+    }, 10);
+}

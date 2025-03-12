@@ -53,28 +53,24 @@ body {
     margin: 20px;
 }
 
-/* 📌 페이지 전환 스타일 */
-.page {
-    display: none;
-}
-
-.page.active {
-    display: block;
-}
-
-/* 📌 타이머 진행바 */
-.progress-container {
-    width: 100%;
-    height: 20px;
-    background-color: #ddd;
-    border-radius: 10px;
+/* 📌 계산기 버튼 정렬 */
+.calc-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
     margin-top: 10px;
-    overflow: hidden;
 }
 
-#progressBar {
-    width: 100%;
-    height: 100%;
-    background-color: red;
-    transition: width 0.1s linear;
+/* 📌 원형 타이머 스타일 */
+.circle-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#progressCircle {
+    transition: stroke-dashoffset 0.1s linear;
+    transform: rotate(-90deg);
+    transform-origin: center;
 }
