@@ -12,9 +12,9 @@
         <nav class="sidebar">
             <h2>메뉴</h2>
             <ul>
-                <li><a href="#" data-page="dday">📅 D-day 계산</a></li>
-                <li><a href="#" data-page="calculator">🧮 간단한 계산기</a></li>
-                <li><a href="#" data-page="timer">⏳ 타이머</a></li>
+                <li><a href="#" onclick="showPage('dday')">📅 D-day 계산</a></li>
+                <li><a href="#" onclick="showPage('calculator')">🧮 간단한 계산기</a></li>
+                <li><a href="#" onclick="showPage('timer')">⏳ 타이머</a></li>
             </ul>
         </nav>
 
@@ -25,7 +25,7 @@
                 <h1>D-day 계산기</h1>
                 <label for="dateInput">D-day 날짜 선택:</label>
                 <input type="date" id="dateInput">
-                <button id="ddayBtn">계산하기</button>
+                <button onclick="calculateDday()">계산하기</button>
                 <p id="result"></p>
             </div>
 
@@ -33,7 +33,7 @@
             <div id="calculator" class="page">
                 <h1>간단한 계산기</h1>
                 <div class="calc-container">
-                    <input type="text" id="calcInput" placeholder="계산식 입력 (예: 2+2)">
+                    <input type="text" id="calcInput" placeholder="계산식 입력 (예: 2+2)" onkeypress="handleEnter(event)">
                     <div class="calc-buttons">
                         <button onclick="appendCalc('7')">7</button>
                         <button onclick="appendCalc('8')">8</button>
@@ -61,7 +61,7 @@
             <div id="timer" class="page">
                 <h1>타이머</h1>
                 <input type="number" id="timerInput" placeholder="초 입력">
-                <button id="timerBtn">시작</button>
+                <button onclick="startTimer()">시작</button>
                 <p id="timerDisplay"></p>
                 <div class="progress-container">
                     <div id="progressBar"></div>
