@@ -47,16 +47,6 @@ function calculate() {
     }
 }
 
-function updateCalcHistory() {
-    let historyElement = document.getElementById("calcHistory");
-    historyElement.innerHTML = "";
-    calcHistory.forEach(item => {
-        let li = document.createElement("li");
-        li.innerText = item;
-        historyElement.appendChild(li);
-    });
-}
-
 // 📌 원형 타이머 기능
 let timerInterval;
 function startTimer() {
