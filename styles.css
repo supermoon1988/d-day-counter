@@ -53,13 +53,30 @@ body {
     margin: 20px;
 }
 
-/* 📌 계산기 버튼 정렬 */
+/* 📌 계산기 버튼 정렬 (4x4 배열) */
 .calc-buttons {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* 4열 레이아웃 */
     gap: 5px;
     margin-top: 10px;
+    width: 200px;
+    margin: auto;
 }
+
+.calc-buttons button {
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.calc-buttons button:hover {
+    background-color: #ddd;
+}
+
 
 /* 📌 원형 타이머 스타일 */
 .circle-timer {
