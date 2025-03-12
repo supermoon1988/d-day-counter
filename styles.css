@@ -21,45 +21,16 @@ body {
     color: white;
     padding: 20px;
     height: 100vh;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar ul li a {
-    text-decoration: none;
-    color: white;
-    display: block;
+/* 📌 방문자 카운터 스타일 */
+.visitor-counter {
+    margin-top: 20px;
     padding: 10px;
-    background-color: #444;
+    background-color: #222;
+    color: white;
     border-radius: 5px;
     text-align: center;
-}
-
-.sidebar ul li a:hover {
-    background-color: #555;
-}
-
-/* 📌 콘텐츠 스타일 */
-.content {
-    flex: 1;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-}
-
-/* 📌 페이지 전환 스타일 */
-.page {
-    display: none;
-}
-
-.page.active {
-    display: block;
 }
 
 /* 📌 계산기 버튼 정렬 */
@@ -75,18 +46,4 @@ body {
     gap: 5px;
     margin-top: 10px;
     width: 200px;
-}
-
-/* 📌 원형 타이머 스타일 */
-.circle-timer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-}
-
-#progressCircle {
-    transition: stroke-dashoffset 0.1s linear;
-    transform: rotate(-90deg);
-    transform-origin: center;
 }

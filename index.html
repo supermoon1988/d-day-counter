@@ -16,6 +16,11 @@
                 <li><a href="#" onclick="showPage('calculator')">🧮 간단한 계산기</a></li>
                 <li><a href="#" onclick="showPage('timer')">⏳ 타이머</a></li>
             </ul>
+            <!-- 📌 방문자 카운터 -->
+            <div class="visitor-counter">
+                <p>👤 오늘 방문: <span id="todayCount">0</span></p>
+                <p>🌍 총 방문: <span id="totalCount">0</span></p>
+            </div>
         </nav>
 
         <!-- 📌 콘텐츠 영역 -->
@@ -33,7 +38,7 @@
             <div id="calculator" class="page">
                 <h1>간단한 계산기</h1>
                 <div class="calc-container">
-                    <input type="text" id="calcInput" placeholder="계산식 입력 (예: 2+2)">
+                    <input type="text" id="calcInput" placeholder="계산식 입력 (예: 2×2)">
                     <div class="calc-buttons">
                         <button onclick="appendCalc('7')">7</button>
                         <button onclick="appendCalc('8')">8</button>
@@ -46,11 +51,11 @@
                         <button onclick="appendCalc('1')">1</button>
                         <button onclick="appendCalc('2')">2</button>
                         <button onclick="appendCalc('3')">3</button>
-                        <button onclick="appendCalc('*')">×</button>
+                        <button onclick="appendCalc('×')">×</button>
                         <button onclick="appendCalc('0')">0</button>
                         <button onclick="clearCalc()">C</button>
                         <button onclick="calculate()">=</button>
-                        <button onclick="appendCalc('/')">÷</button>
+                        <button onclick="appendCalc('÷')">÷</button>
                     </div>
                 </div>
                 <h3>최근 결과</h3>
