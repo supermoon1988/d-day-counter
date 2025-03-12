@@ -60,3 +60,33 @@ function updateCalcHistory() {
         historyElement.appendChild(li);
     });
 }
+
+// 📌 타이머 기능
+let timerInterval;
+function startTimer() {
+    let seconds = parseFloat(document.getElementById("timerInput").value);
+    if (isNaN(seconds) || seconds <= 0) {
+        alert("올바른 시간을 입력하세요.");
+        return;
+    }
+
+    let totalTime = seconds;
+    clearInterval(timerInterval);
+
+    function updateTimer() {
+        let progress = (seconds / totalTime) * 100;
+        document.getElementById("progressBar").style.width = progress + "%";
+        document.getElementById("timerDisplay").innerText = `${seconds.toFixed(2)}초 남았습니다.`;
+
+        if (seconds <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById("timerDisplay").innerText = "⏳ 타이머 종료!";
+            document.getElementById("progressBar").style.width = "0%";
+        } else {
+            seconds -= 0.01;
+        }
+    }
+
+    timerInterval = setInterval(updateTimer, 10);
+    updateTimer();
+}
