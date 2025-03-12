@@ -1,8 +1,7 @@
-// 📌 메뉴 전환 기능
+// 📌 메뉴 전환 기능 (선택한 페이지만 표시)
 function showPage(pageId) {
     let pages = document.querySelectorAll(".page");
     pages.forEach(page => page.classList.remove("active"));
-
     document.getElementById(pageId).classList.add("active");
 }
 

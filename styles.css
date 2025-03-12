@@ -53,6 +53,15 @@ body {
     margin: 20px;
 }
 
+/* 📌 페이지 전환 스타일 */
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
 /* 📌 계산기 버튼 정렬 */
 .calc-container {
     display: flex;
