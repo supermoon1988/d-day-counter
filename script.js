@@ -1,7 +1,31 @@
-// 📌 메뉴 전환 기능
+document.addEventListener("DOMContentLoaded", function () {
+    // 📌 메뉴 전환 기능 (버튼 클릭 시 작동)
+    document.querySelectorAll(".sidebar ul li a").forEach(link => {
+        link.addEventListener("click", function () {
+            let pageId = this.getAttribute("data-page");
+            showPage(pageId);
+        });
+    });
+
+    // 📌 D-day 계산 이벤트 연결
+    document.getElementById("ddayBtn").addEventListener("click", calculateDday);
+
+    // 📌 타이머 시작 이벤트 연결
+    document.getElementById("timerBtn").addEventListener("click", startTimer);
+
+    // 📌 계산기 엔터키 이벤트 연결
+    document.getElementById("calcInput").addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            calculate();
+        }
+    });
+});
+
+// 📌 메뉴 전환 함수
 function showPage(pageId) {
-    let pages = document.querySelectorAll(".page");
-    pages.forEach(page => page.classList.remove("active"));
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
 
     document.getElementById(pageId).classList.add("active");
 }
@@ -45,10 +69,6 @@ function calculate() {
     } catch {
         alert("올바른 계산식을 입력하세요.");
     }
-}
-
-function handleEnter(event) {
-    if (event.key === "Enter") calculate();
 }
 
 function updateCalcHistory() {
