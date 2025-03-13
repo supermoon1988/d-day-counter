@@ -1,3 +1,28 @@
+// SEO 최적화: 인기 키워드를 활용한 제목, 메타 태그, 해시태그 반영
+document.addEventListener("DOMContentLoaded", function () {
+    // 인기 키워드 배열 (필요에 따라 업데이트)
+    const keywords = ["디데이 계산기", "D-day 카운트다운", "기념일 계산", "연애 디데이"];
+    
+    // 1. 사이트 제목 업데이트: 랜덤 키워드를 선택해 제목에 반영
+    const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)];
+    document.title = `${randomKeyword} - 나만의 디데이 도구`;
+    
+    // 2. 메타 태그 업데이트: SEO를 위한 meta 키워드 설정 (구글은 meta keywords를 크게 반영하지 않지만, 다른 검색엔진이나 SNS 미리보기에 도움이 될 수 있음)
+    let metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+      metaKeywords = document.createElement("meta");
+      metaKeywords.name = "keywords";
+      document.head.appendChild(metaKeywords);
+    }
+    metaKeywords.content = keywords.join(", ");
+    
+    // 3. 해시태그 영역 업데이트: HTML에 id="hashtagContainer" 요소가 있을 경우, 인기 키워드를 해시태그 형태로 표시
+    const hashtagContainer = document.getElementById("hashtagContainer");
+    if (hashtagContainer) {
+      const hashtags = keywords.map(keyword => "#" + keyword.replace(/\s/g, ""));
+      hashtagContainer.innerText = hashtags.join(" ");
+    }
+  });  
 document.addEventListener("DOMContentLoaded", function () {
     updateVisitorCount();
 
