@@ -9,31 +9,7 @@ function showPage(pageId) {
     document.getElementById(pageId).classList.add("active");
 }
 
-// 📌 D-day 계산 기능
-function calculateDday() {
-    let inputDate = document.getElementById("dateInput").value;
-    if (!inputDate) {
-        alert("날짜를 선택해주세요!");
-        return;
-    }
-
-    let today = new Date();
-    let targetDate = new Date(inputDate);
-    let diff = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
-
-    document.getElementById("result").innerText = `D-day: ${diff}일 남았습니다!`;
-}
-
-// 📌 계산기 기능
-let calcHistory = [];
-function appendCalc(value) {
-    document.getElementById("calcInput").value += value;
-}
-
-function clearCalc() {
-    document.getElementById("calcInput").value = "";
-}
-
+// 📌 계산기 기능 (×, ÷ 변환)
 function calculate() {
     let input = document.getElementById("calcInput").value.trim();
     if (!input) return;
@@ -43,18 +19,32 @@ function calculate() {
     try {
         let result = eval(input);
         document.getElementById("calcInput").value = result;
-
-        if (calcHistory.length >= 10) calcHistory.shift();
-        calcHistory.push(`${input} = ${result}`);
-        updateCalcHistory();
     } catch {
         alert("올바른 계산식을 입력하세요.");
     }
 }
 
+// 📌 원형 타이머 기능 (매끄러운 감소)
+let timerInterval;
+function startTimer() {
+    let seconds = parseFloat(document.getElementById("timerInput").value);
+    let totalTime = seconds;
+    if (isNaN(seconds) || seconds <= 0) return;
+
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        let progress = (seconds / totalTime) * 314;
+        document.getElementById("progressCircle").style.strokeDashoffset = progress;
+        document.getElementById("timerDisplay").innerText = `${seconds.toFixed(2)}초 남았습니다.`;
+
+        if (seconds <= 0) clearInterval(timerInterval);
+        else seconds -= 0.01;
+    }, 10);
+}
+
 // 📌 방문자 카운트 기능
 function updateVisitorCount() {
-    let today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+    let today = new Date().toISOString().split("T")[0];
     let lastVisit = localStorage.getItem("lastVisitDate");
 
     if (lastVisit !== today) {

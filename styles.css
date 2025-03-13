@@ -31,6 +31,7 @@ body {
     color: white;
     border-radius: 5px;
     text-align: center;
+    font-size: 14px;
 }
 
 /* 📌 계산기 버튼 정렬 */
@@ -46,4 +47,27 @@ body {
     gap: 5px;
     margin-top: 10px;
     width: 200px;
+}
+
+/* 📌 페이지 전환 스타일 */
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* 📌 원형 타이머 스타일 */
+.circle-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#progressCircle {
+    transition: stroke-dashoffset 0.1s linear;
+    transform: rotate(-90deg);
+    transform-origin: center;
 }
