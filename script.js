@@ -13,6 +13,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+// 로컬 날짜(YYYY-MM-DD) 문자열 반환 (UTC가 아닌 현지 시간 기준)
+function getLocalDateString() {
+    let d = new Date();
+    let year = d.getFullYear();
+    let month = (d.getMonth() + 1).toString().padStart(2, '0');
+    let day = d.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 // 메뉴 전환 기능 (선택한 페이지만 표시)
 function showPage(pageId) {
     let pages = document.querySelectorAll(".page");
@@ -105,8 +114,9 @@ function startTimer() {
 }
 
 // ★ 방문자 카운트 기능 (수정된 버전)
+// 매번 페이지 로드 시 로컬 시간 기준 오늘 방문 수가 갱신됩니다.
 function updateVisitorCount() {
-    let today = new Date().toISOString().split("T")[0];
+    let today = getLocalDateString();
     let storedDate = localStorage.getItem("lastVisitDate");
     let todayCount = parseInt(localStorage.getItem("todayCount") || "0");
     let totalCount = parseInt(localStorage.getItem("totalCount") || "0");
