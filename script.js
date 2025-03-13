@@ -13,15 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// 로컬 날짜(YYYY-MM-DD) 문자열 반환 (UTC가 아닌 현지 시간 기준)
-function getLocalDateString() {
-    let d = new Date();
-    let year = d.getFullYear();
-    let month = (d.getMonth() + 1).toString().padStart(2, '0');
-    let day = d.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
-
 // 메뉴 전환 기능 (선택한 페이지만 표시)
 function showPage(pageId) {
     let pages = document.querySelectorAll(".page");
@@ -34,6 +25,12 @@ function calculateDday() {
     let dateInput = document.getElementById("dateInput").value;
     if (!dateInput) {
         document.getElementById("result").innerText = "날짜를 선택해주세요.";
+        return;
+    }
+    // 날짜 입력 형식 검증: 연도는 4자리여야 함
+    let parts = dateInput.split("-");
+    if (parts[0].length !== 4) {
+        document.getElementById("result").innerText = "연도는 4자리여야 합니다.";
         return;
     }
     let selectedDate = new Date(dateInput);
@@ -56,6 +53,38 @@ function calculateDday() {
          resultText = `${Math.abs(diffDays)}일 지났습니다.`;
     }
     document.getElementById("result").innerText = resultText;
+}
+
+// ★ 몇째 되는 날 계산 기능
+function calculateOrdinalDay() {
+    let dateInput = document.getElementById("dateInput").value;
+    if (!dateInput) {
+        document.getElementById("ordinalResult").innerText = "시작 날짜를 선택해주세요.";
+        return;
+    }
+    // 날짜 입력 형식 검증: 연도는 4자리여야 함
+    let parts = dateInput.split("-");
+    if (parts[0].length !== 4) {
+        document.getElementById("ordinalResult").innerText = "연도는 4자리여야 합니다.";
+        return;
+    }
+    let startDate = new Date(dateInput);
+    if (isNaN(startDate.getTime())) {
+        document.getElementById("ordinalResult").innerText = "유효한 날짜를 입력해주세요.";
+        return;
+    }
+    let ordinal = parseInt(document.getElementById("ordinalInput").value, 10);
+    if (isNaN(ordinal) || ordinal <= 0) {
+        document.getElementById("ordinalResult").innerText = "올바른 순번을 입력해주세요.";
+        return;
+    }
+    // 시작 날짜를 1일째로 간주 (즉, n번째 날 = 시작 날짜에서 n-1일 후)
+    let targetDate = new Date(startDate);
+    targetDate.setDate(targetDate.getDate() + (ordinal - 1));
+    let year = targetDate.getFullYear();
+    let month = targetDate.getMonth() + 1; // 월은 0부터 시작하므로 +1
+    let day = targetDate.getDate();
+    document.getElementById("ordinalResult").innerText = `${ordinal}째 되는 날은 ${year}년 ${month}월 ${day}일 입니다.`;
 }
 
 // ★ 계산기 기능
@@ -114,21 +143,19 @@ function startTimer() {
 }
 
 // ★ 방문자 카운트 기능 (수정된 버전)
-// 매번 페이지 로드 시 로컬 시간 기준 오늘 방문 수가 갱신됩니다.
 function updateVisitorCount() {
-    let today = getLocalDateString();
+    let today = new Date().toISOString().split("T")[0];
     let storedDate = localStorage.getItem("lastVisitDate");
-    let todayCount = parseInt(localStorage.getItem("todayCount") || "0");
-    let totalCount = parseInt(localStorage.getItem("totalCount") || "0");
+    let todayCount = parseInt(localStorage.getItem("todayCount") || "0", 10);
+    let totalCount = parseInt(localStorage.getItem("totalCount") || "0", 10);
 
     if (storedDate !== today) {
-        // 새로운 날이면 todayCount를 1로 초기화하고 날짜 업데이트
-        todayCount = 1;
+        // 새로운 날이면 todayCount를 0으로 초기화하고 날짜 업데이트
+        todayCount = 0;
         localStorage.setItem("lastVisitDate", today);
-    } else {
-        // 같은 날이면 todayCount 증가
-        todayCount++;
     }
+    // 페이지 방문 시마다 todayCount와 totalCount 증가
+    todayCount++;
     totalCount++;
 
     localStorage.setItem("todayCount", todayCount);
