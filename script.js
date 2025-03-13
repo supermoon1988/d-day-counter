@@ -28,24 +28,23 @@ function calculateDday() {
         return;
     }
     let selectedDate = new Date(dateInput);
-    // 입력값이 유효한 날짜인지 확인
     if (isNaN(selectedDate.getTime())) {
         document.getElementById("result").innerText = "유효한 날짜를 입력해주세요.";
         return;
     }
     let today = new Date();
-    // 시간 부분을 제거하여 날짜만 비교
+    // 날짜만 비교하도록 시간 정보 제거
     today.setHours(0, 0, 0, 0);
     selectedDate.setHours(0, 0, 0, 0);
     let diffTime = selectedDate.getTime() - today.getTime();
     let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
     let resultText = "";
     if (diffDays > 0) {
-         resultText = `D-${diffDays}`;
+         resultText = `${diffDays}일 남았습니다.`;
     } else if (diffDays === 0) {
-         resultText = "D-Day입니다!";
+         resultText = "오늘입니다.";
     } else {
-         resultText = `D+${Math.abs(diffDays)}`;
+         resultText = `${Math.abs(diffDays)}일 지났습니다.`;
     }
     document.getElementById("result").innerText = resultText;
 }
@@ -83,21 +82,25 @@ function calculate() {
     }
 }
 
-// ★ 원형 타이머 기능 (기존 코드)
+// ★ 원형 타이머 기능 (수정된 종료 메시지)
 let timerInterval;
 function startTimer() {
     let seconds = parseFloat(document.getElementById("timerInput").value);
-    let totalTime = seconds;
     if (isNaN(seconds) || seconds <= 0) return;
+    let totalTime = seconds;
 
     clearInterval(timerInterval);
     timerInterval = setInterval(() => {
+        if (seconds <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById("timerDisplay").innerText = "끝났습니다";
+            document.getElementById("progressCircle").style.strokeDashoffset = 0;
+            return;
+        }
         let progress = (seconds / totalTime) * 314;
         document.getElementById("progressCircle").style.strokeDashoffset = progress;
         document.getElementById("timerDisplay").innerText = `${seconds.toFixed(2)}초 남았습니다.`;
-
-        if (seconds <= 0) clearInterval(timerInterval);
-        else seconds -= 0.01;
+        seconds -= 0.01;
     }, 10);
 }
 
