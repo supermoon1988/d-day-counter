@@ -104,20 +104,26 @@ function startTimer() {
     }, 10);
 }
 
-// ★ 방문자 카운트 기능 (기존 코드)
+// ★ 방문자 카운트 기능 (수정된 버전)
 function updateVisitorCount() {
     let today = new Date().toISOString().split("T")[0];
-    let lastVisit = localStorage.getItem("lastVisitDate");
+    let storedDate = localStorage.getItem("lastVisitDate");
+    let todayCount = parseInt(localStorage.getItem("todayCount") || "0");
+    let totalCount = parseInt(localStorage.getItem("totalCount") || "0");
 
-    if (lastVisit !== today) {
+    if (storedDate !== today) {
+        // 새로운 날이면 todayCount를 1로 초기화하고 날짜 업데이트
+        todayCount = 1;
         localStorage.setItem("lastVisitDate", today);
-        let todayCount = parseInt(localStorage.getItem("todayCount") || "0") + 1;
-        localStorage.setItem("todayCount", todayCount);
+    } else {
+        // 같은 날이면 todayCount 증가
+        todayCount++;
     }
+    totalCount++;
 
-    let totalCount = parseInt(localStorage.getItem("totalCount") || "0") + 1;
+    localStorage.setItem("todayCount", todayCount);
     localStorage.setItem("totalCount", totalCount);
 
-    document.getElementById("todayCount").innerText = localStorage.getItem("todayCount");
-    document.getElementById("totalCount").innerText = localStorage.getItem("totalCount");
+    document.getElementById("todayCount").innerText = todayCount;
+    document.getElementById("totalCount").innerText = totalCount;
 }
