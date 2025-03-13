@@ -1,5 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     updateVisitorCount();
+
+    // 계산기: 입력 필드에 엔터키 이벤트 추가
+    const calcInput = document.getElementById("calcInput");
+    if (calcInput) {
+        calcInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                calculate();
+            }
+        });
+    }
 });
 
 // 메뉴 전환 기능 (선택한 페이지만 표시)
@@ -17,6 +28,11 @@ function calculateDday() {
         return;
     }
     let selectedDate = new Date(dateInput);
+    // 입력값이 유효한 날짜인지 확인
+    if (isNaN(selectedDate.getTime())) {
+        document.getElementById("result").innerText = "유효한 날짜를 입력해주세요.";
+        return;
+    }
     let today = new Date();
     // 시간 부분을 제거하여 날짜만 비교
     today.setHours(0, 0, 0, 0);
